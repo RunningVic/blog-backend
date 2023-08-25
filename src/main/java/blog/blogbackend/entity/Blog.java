@@ -13,23 +13,16 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "blogs")
+@Table(name = "blogs", uniqueConstraints = {@UniqueConstraint(columnNames = {"title"})})
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long blogId;
-    @NotBlank(message = "The title must not be empty.")
+    private Long id;
+    @Column(name = "title", nullable = false)
     private String title;
     // @NotBlank(message = "The content must not be empty.")
+    @Column(name = "created_at", nullable = false)
     private Date createdAt;
+    @Column(name = "last_modified_at", nullable = false)
     private Date lastModifiedAt;
-
-    @ManyToMany()
-    @JoinTable(
-            name = "blog_tag",
-            joinColumns = { @JoinColumn(name = "blogId") },
-            inverseJoinColumns = { @JoinColumn(name = "tagId") }
-    )
-    @NotEmpty(message = "Tags can not be empty.")
-    private Set<Tag> tags;
 }

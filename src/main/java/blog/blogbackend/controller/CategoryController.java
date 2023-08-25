@@ -1,8 +1,8 @@
 package blog.blogbackend.controller;
 
-import blog.blogbackend.entity.Tag;
+import blog.blogbackend.entity.Category;
 import blog.blogbackend.service.BlogService;
-import blog.blogbackend.service.TagService;
+import blog.blogbackend.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,20 +12,20 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
-public class TagController {
+public class CategoryController {
     @Resource
-    private TagService tagService;
+    private CategoryService tagService;
     @Resource
     private BlogService blogService;
 
     @PostMapping("/tag")
-    public ResponseEntity<Tag> createTag(@Valid @RequestBody Tag tag) {
+    public ResponseEntity<Category> createTag(@Valid @RequestBody Category tag) {
         return new ResponseEntity<>(this.tagService.createTag(tag), HttpStatus.OK);
     }
 
     @GetMapping("/tag/{id}")
-    public ResponseEntity<Tag> getTagById(@PathVariable("id") long id) {
-        Optional<Tag> response = this.tagService.getById(id);
+    public ResponseEntity<Category> getTagById(@PathVariable("id") long id) {
+        Optional<Category> response = this.tagService.getById(id);
         return new ResponseEntity<>(response.get(), HttpStatus.OK);
     }
 }

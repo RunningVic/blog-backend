@@ -1,22 +1,22 @@
 package blog.blogbackend.service;
 
-import blog.blogbackend.Repository.TagRepository;
-import blog.blogbackend.entity.Tag;
+import blog.blogbackend.Repository.CategoryRepository;
+import blog.blogbackend.entity.Category;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Optional;
 
 @Service
-public class TagService {
+public class CategoryService {
     @Resource
-    TagRepository tagRepository;
+    CategoryRepository tagRepository;
 
-    public Tag createTag(Tag tag) {
+    public Category createTag(Category tag) {
         return this.tagRepository.save(tag);
     }
 
-    public Optional<Tag> getById(long id) {
+    public Optional<Category> getById(long id) {
         return this.tagRepository.findById(id);
     }
 }

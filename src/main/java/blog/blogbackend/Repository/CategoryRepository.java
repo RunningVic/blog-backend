@@ -1,9 +1,9 @@
 package blog.blogbackend.Repository;
 
-import blog.blogbackend.entity.Tag;
+import blog.blogbackend.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TagRepository extends JpaRepository<Tag, Long> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 }
