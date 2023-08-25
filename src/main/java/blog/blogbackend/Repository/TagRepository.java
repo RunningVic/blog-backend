@@ -1,6 +1,6 @@
 package blog.blogbackend.Repository;
 
-import blog.blogbackend.model.Tag;
+import blog.blogbackend.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

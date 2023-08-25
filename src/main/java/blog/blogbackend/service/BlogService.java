@@ -1,7 +1,7 @@
 package blog.blogbackend.service;
 
 import blog.blogbackend.Repository.BlogRepository;
-import blog.blogbackend.model.Blog;
+import blog.blogbackend.entity.Blog;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

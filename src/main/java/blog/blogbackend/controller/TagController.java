@@ -1,7 +1,6 @@
 package blog.blogbackend.controller;
 
-import blog.blogbackend.model.Blog;
-import blog.blogbackend.model.Tag;
+import blog.blogbackend.entity.Tag;
 import blog.blogbackend.service.BlogService;
 import blog.blogbackend.service.TagService;
 import org.springframework.http.HttpStatus;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
 
 @RestController

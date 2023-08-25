@@ -1,6 +1,5 @@
-package blog.blogbackend.model;
+package blog.blogbackend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;

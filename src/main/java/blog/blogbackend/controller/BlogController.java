@@ -1,7 +1,7 @@
 package blog.blogbackend.controller;
 
 import blog.blogbackend.Repository.BlogRepository;
-import blog.blogbackend.model.Blog;
+import blog.blogbackend.entity.Blog;
 import blog.blogbackend.service.BlogService;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
