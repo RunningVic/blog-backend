@@ -1,26 +1,18 @@
 package blog.blogbackend.service;
 
-import blog.blogbackend.Repository.BlogRepository;
-import blog.blogbackend.entity.Blog;
-import org.springframework.stereotype.Service;
+import blog.blogbackend.dto.BlogDto;
+import org.springframework.http.ResponseEntity;
 
-import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 
-@Service
-public class BlogService {
-    @Resource
-    private BlogRepository blogRepository;
-    public Blog createBlog(Blog blog) {
-        Date now = new Date();
-        blog.setCreatedAt(now);
-        blog.setLastModifiedAt(now);
-        Blog newBlog = this.blogRepository.save(blog);
-        return newBlog;
-    }
+public interface BlogService {
+    BlogDto createBlog(BlogDto blogDto);
 
-    public List<Blog> getAllBlogs() {
-        return this.blogRepository.findAll();
-    }
+    List<BlogDto> getAllBlogs();
+
+    BlogDto getBlogById(long id);
+
+    BlogDto updateBlogById(long id, BlogDto blogDto);
+
+    void deleteBlogById(long id);
 }

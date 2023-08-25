@@ -1,7 +1,7 @@
 package blog.blogbackend.controller;
 
 import blog.blogbackend.entity.Category;
-import blog.blogbackend.service.BlogService;
+import blog.blogbackend.service.implementation.BlogServiceImpl;
 import blog.blogbackend.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class CategoryController {
     @Resource
     private CategoryService tagService;
     @Resource
-    private BlogService blogService;
+    private BlogServiceImpl blogService;
 
     @PostMapping("/tag")
     public ResponseEntity<Category> createTag(@Valid @RequestBody Category tag) {
