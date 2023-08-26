@@ -5,11 +5,15 @@ import blog.blogbackend.Repository.CommentRepository;
 import blog.blogbackend.dto.CommentDto;
 import blog.blogbackend.entity.Blog;
 import blog.blogbackend.entity.Comment;
+import blog.blogbackend.exception.BlogApiException;
 import blog.blogbackend.exception.ResourceNotFoundException;
 import blog.blogbackend.service.CommentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -29,6 +33,51 @@ public class CommentServiceImpl implements CommentService {
         comment.setCreatedAt(now);
         Comment savedComment= commentRepository.save(comment);
         return mapToDto(savedComment);
+    }
+
+    @Override
+    public List<CommentDto> getCommentsByBlogId(long blogId) {
+        List<Comment> comments = this.commentRepository.findAllByBlogId(blogId);
+        List<CommentDto> response = comments.stream().map(comment -> mapToDto(comment)).collect(Collectors.toList());
+        return response;
+    }
+
+    @Override
+    public CommentDto getCommentById(long commentId, long blogId) {
+        Comment comment = this.commentRepository.findById(commentId).orElseThrow(
+                () -> new ResourceNotFoundException("Comment", "id", commentId));
+        Blog blog = this.blogRepository.findById(blogId).orElseThrow(
+                () -> new ResourceNotFoundException("Blog", "id", blogId));
+        if (comment.getBlog().getId() != blog.getId()) {
+            throw new BlogApiException(HttpStatus.BAD_REQUEST, "Comment does not belong to blog");
+        }
+        return mapToDto(comment);
+    }
+
+    @Override
+    public void deleteCommentById(long blogId, long commentId) {
+        Comment comment = this.commentRepository.findById(commentId).orElseThrow(
+                () -> new ResourceNotFoundException("Comment", "id", commentId));
+        Blog blog = this.blogRepository.findById(blogId).orElseThrow(
+                () -> new ResourceNotFoundException("Blog", "id", blogId));
+        if (comment.getBlog().getId() != blog.getId()) {
+            throw new BlogApiException(HttpStatus.BAD_REQUEST, "Comment does not belong to blog");
+        }
+        this.commentRepository.deleteById(commentId);
+    }
+
+    @Override
+    public CommentDto updateComment(long blogId, long commentId, CommentDto commentDto) {
+        Comment comment = this.commentRepository.findById(commentId).orElseThrow(
+                () -> new ResourceNotFoundException("Comment", "id", commentId));
+        Blog blog = this.blogRepository.findById(blogId).orElseThrow(
+                () -> new ResourceNotFoundException("Blog", "id", blogId));
+        if (comment.getBlog().getId() != blog.getId()) {
+            throw new BlogApiException(HttpStatus.BAD_REQUEST, "Comment does not belong to blog");
+        }
+        comment.setBody(commentDto.getBody());
+        Comment updatedComment = this.commentRepository.save(comment);
+        return mapToDto(updatedComment);
     }
 
     private CommentDto mapToDto(Comment comment) {
