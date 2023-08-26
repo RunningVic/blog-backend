@@ -6,4 +6,5 @@ import lombok.Data;
 public class BlogDto {
     private long id;
     private String title;
+    private long likes;
 }

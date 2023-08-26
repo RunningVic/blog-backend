@@ -3,8 +3,6 @@ package blog.blogbackend.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.Set;
 
@@ -25,4 +23,9 @@ public class Blog {
     private Date createdAt;
     @Column(name = "last_modified_at", nullable = false)
     private Date lastModifiedAt;
+    @Column(name = "likes")
+    private long likes;
+
+    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comment> comments;
 }

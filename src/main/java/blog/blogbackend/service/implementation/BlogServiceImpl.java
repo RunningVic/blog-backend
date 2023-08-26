@@ -70,6 +70,7 @@ public class BlogServiceImpl implements BlogService {
         BlogDto blogDto = new BlogDto();
         blogDto.setTitle(blog.getTitle());
         blogDto.setId(blog.getId());
+        blogDto.setLikes(blog.getLikes());
         return blogDto;
     }
 }
